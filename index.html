@@ -1023,16 +1023,20 @@
 
 .venue-info {
   text-align: center;
-  margin: 6px 0 22px;
+  margin: 6px auto 22px;
+  width: 100%;
 }
 
 .venue-name {
-  font-size: 22px;
+   width: 100%;
+  margin: 0 auto 10px;
+  text-align: center;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1.35;
   color: #2f2a26;
-  margin-bottom: 10px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
   white-space: nowrap;
 }
 
@@ -1050,8 +1054,8 @@
 @media (max-width: 390px) {
   .venue-name {
     font-size: 18px;
+    letter-spacing: -0.05em;
     white-space: nowrap;
-    letter-spacing: -0.04em;
   }
 }
 
@@ -2132,6 +2136,7 @@
               <div class="invite-letter-pin"></div>
 
               <div class="invite-letter-body">
+                 <div class="note-line">&nbsp;&nbsp;&nbsp;<strong>초대합니다.</strong></div>
                 <div class="note-line">&nbsp;&nbsp;&nbsp;만남을 시작하고 지구가 두 바퀴 회전한 날</div>
                 <div class="note-line">&nbsp;&nbsp;&nbsp;저희 결혼합니다.</div>
                 <div class="note-line">&nbsp;&nbsp;&nbsp;추운 겨울을 이겨내고 서로에게 봄이 되어</div>
@@ -2145,7 +2150,7 @@
                 <div class="sign-line">조신용 · 문명희 의 딸 조은아</div>
               </div>
 
-              <div class="flip-hint"><br />Click</div>
+              <div class="flip-hint">Click</div>
             </div>
 
             <div class="invite-back">
