@@ -493,12 +493,12 @@
 
     .film-small {
       transform: rotate(8deg) translateX(-40px);
-      animation: filmFlowReverse 31s linear infinite;
+      animation: filmFlowReverse 18s linear infinite;
     }
 
     .film-large {
       transform: rotate(-8deg) translateX(-20px);
-      animation: filmFlow 27s linear infinite;
+      animation: filmFlow 18s linear infinite;
     }
 
     @keyframes filmFlow {
@@ -976,52 +976,43 @@
     }
 
     /* GALLERY */
-    .gallery-wall {
-      background: var(--bg-light);
-      padding: 16px 8px 0;
-    }
+   .polaroid-heart {
+  position: relative;
+  width: 390px;
+  height: 560px;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-    .polaroid-heart {
-      position: relative;
-      width: 100%;
-      min-height: 680px;
-      margin: 0 auto;
-    }
+.gallery-wall {
+  width: 100%;
+  overflow: visible;
+}
 
-    .polaroid {
-      position: absolute;
-      width: 72px;
-      background: #fff;
-      padding: 4px 4px 12px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      transform: rotate(var(--rot));
-    }
+.polaroid {
+  position: absolute;
+  width: 78px;
+  background: #fff;
+  padding: 6px 6px 16px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.16);
+  transform: rotate(var(--rot));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
 
-    .polaroid:hover {
-      transform: scale(1.05) rotate(var(--rot));
-      z-index: 5;
-    }
+.polaroid img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
 
-    .polaroid img {
-      width: 100%;
-      aspect-ratio: 1 / 1.12;
-      object-fit: cover;
-      display: block;
-    }
-
-    .polaroid::before {
-      content: "";
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      width: 18px;
-      height: 18px;
-      transform: translateX(-50%) rotate(-8deg);
-      background: rgba(255,255,255,0.65);
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    }
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.06);
+  z-index: 10;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+}
 
 /* =========================
    LOCATION MAP
@@ -1534,7 +1525,7 @@
 .invite-flip-inner {
   position: relative;
   width: 100%;
-  height: 360px;
+  height: 400px;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   transition: transform 0.9s ease;
@@ -1923,7 +1914,7 @@
       </div>
 
       <div class="film-center-copy">
-        <div class="film-center-icon">🎥🎬</div>
+        <div class="film-center-icon">🎬</div>
         <p class="film-center-text">
           오늘의 네가 아니라면 난 영영 사랑을 몰랐을 거야.<br />
           사랑하는 법을 알려줘서 고마워.<br />
@@ -2115,7 +2106,7 @@
                 <div class="sign-line">조신용 · 문명희 의 딸 조은아</div>
               </div>
 
-              <div class="flip-hint">Click</div>
+              <div class="flip-hint"><br />Click</div>
             </div>
 
             <div class="invite-back">
@@ -2195,37 +2186,38 @@
           <h2>GALLERY</h2>
         </div>
 
-        <div class="gallery-wall">
-          <div class="polaroid-heart">
-            <div class="polaroid" data-full="images/g1.png"  style="top:14px;  left:118px; --rot:-8deg;"><img src="images/g1.png"  alt=""></div>
-            <div class="polaroid" data-full="images/g2.jpg"  style="top:14px;  left:198px; --rot:7deg;"><img src="images/g2.jpg"  alt=""></div>
+      <div class="gallery-wall">
+  <div class="gallery-wall">
+  <div class="polaroid-heart">
+    <div class="polaroid" data-full="images/g1.png"  style="top:18px;  left:92px;  --rot:-10deg;"><img src="images/g1.png"  alt=""></div>
+    <div class="polaroid" data-full="images/g2.jpg"  style="top:18px;  left:212px; --rot:9deg;"><img src="images/g2.jpg"  alt=""></div>
 
-            <div class="polaroid" data-full="images/g3.png"  style="top:58px;  left:64px;  --rot:-9deg;"><img src="images/g3.png"  alt=""></div>
-            <div class="polaroid" data-full="images/g4.png"  style="top:84px;  left:116px; --rot:6deg;"><img src="images/g4.png"  alt=""></div>
-            <div class="polaroid" data-full="images/g5.jpg"  style="top:94px;  left:172px; --rot:-4deg;"><img src="images/g5.jpg"  alt=""></div>
-            <div class="polaroid" data-full="images/g6.jpg"  style="top:58px;  left:250px; --rot:8deg;"><img src="images/g6.jpg"  alt=""></div>
+    <div class="polaroid" data-full="images/g3.png"  style="top:64px;  left:42px;  --rot:-10deg;"><img src="images/g3.png"  alt=""></div>
+    <div class="polaroid" data-full="images/g4.png"  style="top:92px;  left:102px; --rot:7deg;"><img src="images/g4.png"  alt=""></div>
+    <div class="polaroid" data-full="images/g5.jpg"  style="top:102px; left:154px; --rot:-4deg;"><img src="images/g5.jpg"  alt=""></div>
+    <div class="polaroid" data-full="images/g6.jpg"  style="top:92px;  left:212px; --rot:4deg;"><img src="images/g6.jpg"  alt=""></div>
+    <div class="polaroid" data-full="images/g7.jpg"  style="top:64px;  left:272px; --rot:9deg;"><img src="images/g7.jpg"  alt=""></div>
 
-            <div class="polaroid" data-full="images/g7.jpg"  style="top:126px; left:26px;  --rot:-7deg;"><img src="images/g7.jpg"  alt=""></div>
-            <div class="polaroid" data-full="images/g8.jpg"  style="top:156px; left:82px;  --rot:5deg;"><img src="images/g8.jpg"  alt=""></div>
-            <div class="polaroid" data-full="images/g9.jpg"  style="top:174px; left:138px; --rot:-6deg;"><img src="images/g9.jpg"  alt=""></div>
-            <div class="polaroid" data-full="images/g10.jpg" style="top:174px; left:196px; --rot:6deg;"><img src="images/g10.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g11.jpg" style="top:156px; left:252px; --rot:-6deg;"><img src="images/g11.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g12.jpg" style="top:126px; left:308px; --rot:7deg;"><img src="images/g12.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g8.jpg"  style="top:144px; left:8px;   --rot:-8deg;"><img src="images/g8.jpg"  alt=""></div>
+    <div class="polaroid" data-full="images/g9.jpg"  style="top:170px; left:68px;  --rot:6deg;"><img src="images/g9.jpg"  alt=""></div>
+    <div class="polaroid" data-full="images/g10.jpg" style="top:186px; left:128px; --rot:-6deg;"><img src="images/g10.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g11.jpg" style="top:190px; left:192px; --rot:5deg;"><img src="images/g11.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g12.jpg" style="top:170px; left:254px; --rot:-6deg;"><img src="images/g12.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g13.jpg" style="top:144px; left:314px; --rot:8deg;"><img src="images/g13.jpg" alt=""></div>
 
-            <div class="polaroid" data-full="images/g13.jpg" style="top:228px; left:48px;  --rot:6deg;"><img src="images/g13.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g14.jpg" style="top:254px; left:104px; --rot:-6deg;"><img src="images/g14.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g15.jpg" style="top:270px; left:160px; --rot:3deg;"><img src="images/g15.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g16.jpg" style="top:254px; left:218px; --rot:-8deg;"><img src="images/g16.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g17.jpg" style="top:228px; left:274px; --rot:6deg;"><img src="images/g17.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g14.jpg" style="top:246px; left:34px;  --rot:7deg;"><img src="images/g14.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g15.jpg" style="top:272px; left:98px;  --rot:-6deg;"><img src="images/g15.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g16.jpg" style="top:290px; left:160px; --rot:3deg;"><img src="images/g16.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g17.jpg" style="top:272px; left:222px; --rot:-8deg;"><img src="images/g17.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g18.jpg" style="top:246px; left:286px; --rot:7deg;"><img src="images/g18.jpg" alt=""></div>
 
-            <div class="polaroid" data-full="images/g18.jpg" style="top:338px; left:100px; --rot:-5deg;"><img src="images/g18.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g19.jpg" style="top:362px; left:160px; --rot:6deg;"><img src="images/g19.jpg" alt=""></div>
-            <div class="polaroid" data-full="images/g20.jpg" style="top:338px; left:220px; --rot:-4deg;"><img src="images/g20.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g19.jpg" style="top:360px; left:112px; --rot:-5deg;"><img src="images/g19.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g20.jpg" style="top:386px; left:170px; --rot:5deg;"><img src="images/g20.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g21.jpg" style="top:360px; left:228px; --rot:-4deg;"><img src="images/g21.jpg" alt=""></div>
 
-            <div class="polaroid" data-full="images/g21.jpg" style="top:450px; left:160px; --rot:2deg;"><img src="images/g21.jpg" alt=""></div>
-          </div>
-        </div>
-      </section>
+    <div class="polaroid" data-full="images/g22.jpg" style="top:466px; left:170px; --rot:2deg;"><img src="images/g22.jpg" alt=""></div>
+  </div>
+</div>
 
 <section class="section location-section" id="location">
   <div class="section-title">
