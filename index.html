@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>모바일 청첩장</title>
-  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_NAVER_MAP_CLIENT_ID"></script>
+  <script defer type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_NAVER_MAP_CLIENT_ID"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" as="image" href="images/optimized/2.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700;800&family=Montserrat:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -976,42 +977,54 @@
     }
 
     /* GALLERY */
-   .polaroid-heart {
-  position: relative;
-  width: 390px;
-  height: 560px;
-  margin: 0 auto;
-  left: 50%;
-  transform: translateX(-50%);
+.gallery-wall{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  width:100%;
+  margin:0 auto;
 }
 
-.gallery-wall {
-  width: 100%;
-  overflow: visible;
+.polaroid-heart{
+  position:relative;
+  width:430px;
+  height:610px;
+  margin:0 auto;
 }
 
-.polaroid {
-  position: absolute;
-  width: 78px;
-  background: #fff;
-  padding: 6px 6px 16px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.16);
-  transform: rotate(var(--rot));
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  cursor: pointer;
+.polaroid{
+  position:absolute;
+  width:74px;
+  background:#fff;
+  padding:6px 6px 14px;
+  border-radius:2px;
+  box-shadow:0 8px 18px rgba(0,0,0,.14);
+  transform:rotate(var(--rot));
+  cursor:pointer;
+  transition:transform .22s ease, box-shadow .22s ease;
+  box-sizing:border-box;
 }
 
-.polaroid img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+.polaroid:hover{
+  transform:rotate(var(--rot)) scale(1.05);
+  box-shadow:0 12px 24px rgba(0,0,0,.18);
+  z-index:30;
 }
 
-.polaroid:hover {
-  transform: rotate(0deg) scale(1.06);
-  z-index: 10;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+.polaroid img{
+  display:block;
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+
+@media (max-width:480px){
+  .polaroid-heart{
+    width:430px;
+    height:610px;
+    transform:scale(.92);
+    transform-origin:top center;
+  }
 }
 
 /* =========================
@@ -1482,79 +1495,92 @@
 }
 
     /* MODAL */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.82);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-      padding: 20px;
-    }
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
 
-    .modal.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
+.modal.show {
+  display: flex;
+}
 
-    .modal img {
-      max-width: 100%;
-      max-height: 82vh;
-      width: auto;
-      border-radius: 8px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.35);
-    }
+.modal-image-wrap {
+  width: min(92vw, 430px);
+  max-height: 84vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    .modal-close {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-    }
+.modal img {
+  width: 100%;
+  height: auto;
+  max-height: 84vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
 
-    @media (max-width: 390px) {
-      .polaroid {
-        width: 68px;
-      }
-      .polaroid-heart {
-        min-height: 650px;
-      }
-      .film-center-copy {
-        width: calc(100% - 34px);
-      }
-      .cast-row {
-        grid-template-columns: 1fr;
-      }
-    }
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+}
 
-    @media (max-width: 360px) {
-      .couple-name-ko {
-        font-size: 30px;
-      }
-      .count-card {
-        width: 50px;
-      }
-      .cast-name-ko {
-        font-size: 22px;
-      }
-      .wedding-calendar {
-        width: 156px;
-      }
-      .calendar-day {
-        font-size: 46px;
-      }
-    }
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-prev {
+  left: 14px;
+}
+
+.modal-next {
+  right: 14px;
+}
+
+@media (max-width: 480px) {
+  .modal-nav {
+    width: 38px;
+    height: 38px;
+    font-size: 26px;
+  }
+
+  .modal-prev {
+    left: 8px;
+  }
+
+  .modal-next {
+    right: 8px;
+  }
+}
 /* =========================
    INVITE FLIP CARD
    ========================= */
@@ -1621,10 +1647,10 @@
 .flip-hint {
   margin-top: 14px;
   text-align: center;
-  font-size: 12px;
-  color: rgba(60, 52, 45, 0.58);
+  font-size: 13px;
+  color: rgba(43, 37, 32, 0.58);
   letter-spacing: 0.04em;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Noto Sans KR", sans-sersif;
 }
 
 .back-hint {
@@ -1632,7 +1658,7 @@
   left: 0;
   right: 0;
   bottom: 14px;
-  color: rgba(60, 52, 45, 0.58);
+  color: rgba(255, 254, 253, 0.703);
   text-shadow: 0 1px 6px rgba(0,0,0,0.35);
 }
 
@@ -1897,7 +1923,7 @@
           </div>
 
           <div class="vf-screen">
-            <img src="images/2.jpg" alt="오프닝 뷰파인더 움짤" />
+            <img src="images/optimized/2.jpg" fetchpriority="high" decoding="async" alt="오프닝 뷰파인더 움짤" />
 
             <div class="focus-box">
               <span class="focus-corner tl"></span>
@@ -1940,18 +1966,18 @@
       <div class="film-track-wrap top-row">
         <div class="film-track film-small">
           <div class="film-strip">
-            <div class="film-frame"><div class="film-photo"><img src="images/top1.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top2.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top3.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top4.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top5.jpg" alt=""></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top1.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top2.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top3.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top4.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top5.jpg" alt="" loading="lazy" decoding="async"></div></div>
           </div>
           <div class="film-strip">
-            <div class="film-frame"><div class="film-photo"><img src="images/top1.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top2.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top3.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top4.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top5.jpg" alt=""></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top1.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top2.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top3.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top4.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top5.jpg" alt="" loading="lazy" decoding="async"></div></div>
           </div>
         </div>
       </div>
@@ -1974,18 +2000,18 @@
       <div class="film-track-wrap bottom-row">
         <div class="film-track film-large">
           <div class="film-strip">
-            <div class="film-frame"><div class="film-photo"><img src="images/film1.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film2.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film3.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film4.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film5.jpg" alt=""></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film1.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film2.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film3.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film4.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film5.jpg" alt="" loading="lazy" decoding="async"></div></div>
           </div>
           <div class="film-strip">
-            <div class="film-frame"><div class="film-photo"><img src="images/film1.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film2.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film3.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film4.jpg" alt=""></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/film5.jpg" alt=""></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film1.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film2.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film3.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film4.jpg" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/film5.jpg" alt="" loading="lazy" decoding="async"></div></div>
           </div>
         </div>
       </div>
@@ -2150,12 +2176,12 @@
                 <div class="sign-line">조신용 · 문명희 의 딸 조은아</div>
               </div>
 
-              <div class="flip-hint">Click</div>
+              <div class="flip-hint"><strong>⟡ Click ⟡</strong></div>
             </div>
 
             <div class="invite-back">
-              <img src="images/invite_back.jpg" alt="" />
-              <div class="flip-hint back-hint">Click</div>
+              <img src="images/optimized/invite_back.jpg" alt="" loading="lazy" decoding="async" />
+              <div class="flip-hint back-hint"><strong>⟡ Click ⟡</strong></div>
             </div>
           </div>
         </div>
@@ -2224,44 +2250,61 @@
         </div>
       </section>
 
-      <section class="section" id="gallery">
-        <div class="section-title">
-          <div class="symbol">✦</div>
-          <h2>GALLERY</h2>
-        </div>
-
-      <div class="gallery-wall">
-  <div class="gallery-wall">
+    <section class="gallery-section">
+<div class="gallery-wall">
   <div class="polaroid-heart">
-    <div class="polaroid" data-full="images/g1.jpg"  style="top:18px;  left:92px;  --rot:-10deg;"><img src="images/g1.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g2.jpg"  style="top:18px;  left:212px; --rot:9deg;"><img src="images/g2.jpg"  alt=""></div>
 
-    <div class="polaroid" data-full="images/g3.jpg"  style="top:64px;  left:42px;  --rot:-10deg;"><img src="images/g3.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g4.jpg"  style="top:92px;  left:102px; --rot:7deg;"><img src="images/g4.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g5.jpg"  style="top:102px; left:154px; --rot:-4deg;"><img src="images/g5.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g6.jpg"  style="top:92px;  left:212px; --rot:4deg;"><img src="images/g6.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g7.jpg"  style="top:64px;  left:272px; --rot:9deg;"><img src="images/g7.jpg"  alt=""></div>
+  <!-- 1행 : 2장 -->
+<div class="polaroid" data-full="images/g1.jpg"  style="top:8px;  left:77px; --rot:-6deg;"><img src="images/g1.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g2.jpg"  style="top:8px;  left:269px; --rot:6deg;"><img src="images/g2.jpg"  alt=""></div>
 
-    <div class="polaroid" data-full="images/g8.jpg"  style="top:144px; left:8px;   --rot:-8deg;"><img src="images/g8.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g9.jpg"  style="top:170px; left:68px;  --rot:6deg;"><img src="images/g9.jpg"  alt=""></div>
-    <div class="polaroid" data-full="images/g10.jpg" style="top:186px; left:128px; --rot:-6deg;"><img src="images/g10.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g11.jpg" style="top:190px; left:192px; --rot:5deg;"><img src="images/g11.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g12.jpg" style="top:170px; left:254px; --rot:-6deg;"><img src="images/g12.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g13.jpg" style="top:144px; left:314px; --rot:8deg;"><img src="images/g13.jpg" alt=""></div>
+<!-- 2행 : 4장 -->
+<div class="polaroid" data-full="images/g3.jpg"  style="top:78px;  left:46px;  --rot:8deg;"><img src="images/g3.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g4.jpg"  style="top:66px;  left:118px; --rot:-6deg;"><img src="images/g4.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g5.jpg"  style="top:66px;  left:232px; --rot:6deg;"><img src="images/g5.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g6.jpg"  style="top:78px;  left:304px; --rot:-8deg;"><img src="images/g6.jpg"  alt=""></div>
 
-    <div class="polaroid" data-full="images/g14.jpg" style="top:246px; left:34px;  --rot:7deg;"><img src="images/g14.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g15.jpg" style="top:272px; left:98px;  --rot:-6deg;"><img src="images/g15.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g16.jpg" style="top:290px; left:160px; --rot:3deg;"><img src="images/g16.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g17.jpg" style="top:272px; left:222px; --rot:-8deg;"><img src="images/g17.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g18.jpg" style="top:246px; left:286px; --rot:7deg;"><img src="images/g18.jpg" alt=""></div>
+<!-- 3행 : 6장 -->
+<div class="polaroid" data-full="images/g7.jpg"  style="top:155px; left:14px;  --rot:-7deg;"><img src="images/g7.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g8.jpg"  style="top:142px; left:76px;  --rot:5deg;"><img src="images/g8.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g9.jpg"  style="top:134px; left:136px; --rot:-6deg;"><img src="images/g9.jpg"  alt=""></div>
+<div class="polaroid" data-full="images/g10.jpg" style="top:134px; left:202px; --rot:6deg;"><img src="images/g10.jpg" alt=""></div>
+<div class="polaroid" data-full="images/g11.jpg" style="top:142px; left:264px; --rot:-5deg;"><img src="images/g11.jpg" alt=""></div>
+<div class="polaroid" data-full="images/g12.jpg" style="top:155px; left:326px; --rot:7deg;"><img src="images/g12.jpg" alt=""></div>
 
-    <div class="polaroid" data-full="images/g19.jpg" style="top:360px; left:112px; --rot:-5deg;"><img src="images/g19.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g20.jpg" style="top:386px; left:170px; --rot:5deg;"><img src="images/g20.jpg" alt=""></div>
-    <div class="polaroid" data-full="images/g21.jpg" style="top:360px; left:228px; --rot:-4deg;"><img src="images/g21.jpg" alt=""></div>
+    <!-- 4행 : 7장 (가장 넓은 몸통) -->
+    <div class="polaroid" data-full="images/g13.jpg" style="top:238px; left:0px;   --rot:-8deg;"><img src="images/g13.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g14.jpg" style="top:224px; left:50px;  --rot:5deg;"><img src="images/g14.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g15.jpg" style="top:214px; left:110px; --rot:-6deg;"><img src="images/g15.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g16.jpg" style="top:200px; left:170px; --rot:4deg;"><img src="images/g16.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g17.jpg" style="top:214px; left:230px; --rot:-5deg;"><img src="images/g17.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g18.jpg" style="top:224px; left:290px; --rot:-6deg;"><img src="images/g18.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g19.jpg" style="top:238px; left:340px; --rot:7deg;"><img src="images/g19.jpg" alt=""></div>
 
-    <div class="polaroid" data-full="images/g22.jpg" style="top:466px; left:170px; --rot:2deg;"><img src="images/g22.jpg" alt=""></div>
+    <!-- 5행 : 5장 -->
+    <div class="polaroid" data-full="images/g20.jpg" style="top:300px; left:34px;  --rot:6deg;"><img src="images/g20.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g21.jpg" style="top:285px; left:100px; --rot:-7deg;"><img src="images/g21.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g22.jpg" style="top:280px; left:164px; --rot:4deg;"><img src="images/g22.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g23.jpg" style="top:285px; left:230px; --rot:-5deg;"><img src="images/g23.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g24.jpg" style="top:300px; left:294px; --rot:6deg;"><img src="images/g24.jpg" alt=""></div>
+
+    <!-- 6행 : 4장 -->
+    <div class="polaroid" data-full="images/g25.jpg" style="top:368px; left:68px;  --rot:-6deg;"><img src="images/g25.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g26.jpg" style="top:358px; left:136px; --rot:5deg;"><img src="images/g26.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g27.jpg" style="top:358px; left:200px; --rot:-4deg;"><img src="images/g27.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g28.jpg" style="top:368px; left:268px; --rot:7deg;"><img src="images/g28.jpg" alt=""></div>
+
+    <!-- 7행 : 3장 -->
+    <div class="polaroid" data-full="images/g29.jpg" style="top:435px; left:106px; --rot:-7deg;"><img src="images/g29.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g30.jpg" style="top:422px; left:170px; --rot:3deg;"><img src="images/g30.jpg" alt=""></div>
+    <div class="polaroid" data-full="images/g31.jpg" style="top:435px; left:234px; --rot:6deg;"><img src="images/g31.jpg" alt=""></div>
+
+    <!-- 8행 : 1장 -->
+    <div class="polaroid" data-full="images/g32.jpg" style="top:500px; left:178px; --rot:2deg;"><img src="images/g32.jpg" alt=""></div>
+
   </div>
 </div>
+</section>
 
 <section class="section location-section" id="location">
   <div class="section-title">
@@ -2277,7 +2320,7 @@
 
   <div class="static-map-card">
     <img
-      src="images/location-map.png"
+      src="images/location-map.png" loading="lazy" decoding="async"
       alt="상암월드컵컨벤션 위치 지도"
       class="static-map-image"
     />
@@ -2443,14 +2486,21 @@
 <div class="ending-divider"></div>
 
 <section class="ending-photo-section">
-  <img src="images/ending-photo.jpg" alt="웨딩 엔딩 사진" class="ending-photo" />
+  <img src="images/optimized/ending-photo.jpg" alt="웨딩 엔딩 사진" class="ending-photo" loading="lazy" decoding="async" />
   <p class="ending-credit">made by euna</p>
 </section>
 
-  <div class="modal" id="galleryModal">
-    <button class="modal-close" id="modalClose" aria-label="닫기">×</button>
+<div class="modal" id="galleryModal">
+  <button class="modal-close" id="modalClose" aria-label="닫기">×</button>
+
+  <button class="modal-nav modal-prev" id="modalPrev" aria-label="이전 사진">‹</button>
+
+  <div class="modal-image-wrap" id="modalImageWrap">
     <img id="modalImage" src="" alt="확대 이미지" />
   </div>
+
+  <button class="modal-nav modal-next" id="modalNext" aria-label="다음 사진">›</button>
+</div>
 
   <script>
     const weddingDate = new Date("2026-09-20T13:50:00");
@@ -2515,35 +2565,102 @@ function updateCountdown() {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    const polaroids = document.querySelectorAll(".polaroid");
-    const modal = document.getElementById("galleryModal");
-    const modalImage = document.getElementById("modalImage");
-    const modalClose = document.getElementById("modalClose");
+   const polaroids = document.querySelectorAll(".polaroid");
+const modal = document.getElementById("galleryModal");
+const modalImage = document.getElementById("modalImage");
+const modalClose = document.getElementById("modalClose");
+const modalPrev = document.getElementById("modalPrev");
+const modalNext = document.getElementById("modalNext");
+const modalImageWrap = document.getElementById("modalImageWrap");
 
-    if (modal && modalImage && modalClose) {
-      polaroids.forEach((item) => {
-        item.addEventListener("click", () => {
-          const src = item.getAttribute("data-full");
-          modalImage.src = src;
-          modal.classList.add("show");
-        });
-      });
+let currentIndex = 0;
+const galleryImages = Array.from(polaroids).map((item) => item.getAttribute("data-full"));
 
-      function closeModal() {
-        modal.classList.remove("show");
-        modalImage.src = "";
-      }
+function openModal(index) {
+  if (!modal || !modalImage || !galleryImages.length) return;
+  currentIndex = index;
+  modalImage.src = galleryImages[currentIndex];
+  modal.classList.add("show");
+}
 
-      modalClose.addEventListener("click", closeModal);
+function closeModal() {
+  if (!modal || !modalImage) return;
+  modal.classList.remove("show");
+  modalImage.src = "";
+}
 
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-      });
+function showPrevImage() {
+  currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+  modalImage.src = galleryImages[currentIndex];
+}
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-      });
-    }
+function showNextImage() {
+  currentIndex = (currentIndex + 1) % galleryImages.length;
+  modalImage.src = galleryImages[currentIndex];
+}
+
+polaroids.forEach((item, index) => {
+  item.addEventListener("click", () => openModal(index));
+});
+
+if (modalClose) {
+  modalClose.addEventListener("click", closeModal);
+}
+
+if (modalPrev) {
+  modalPrev.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPrevImage();
+  });
+}
+
+if (modalNext) {
+  modalNext.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showNextImage();
+  });
+}
+
+if (modal) {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if (!modal || !modal.classList.contains("show")) return;
+
+  if (e.key === "Escape") closeModal();
+  if (e.key === "ArrowLeft") showPrevImage();
+  if (e.key === "ArrowRight") showNextImage();
+});
+
+/* 터치 스와이프 */
+let touchStartX = 0;
+let touchEndX = 0;
+
+if (modalImageWrap) {
+  modalImageWrap.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  modalImageWrap.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+    handleSwipe();
+  }, { passive: true });
+}
+
+function handleSwipe() {
+  const diff = touchEndX - touchStartX;
+
+  if (Math.abs(diff) < 40) return;
+
+  if (diff > 0) {
+    showPrevImage();
+  } else {
+    showNextImage();
+  }
+}
 
     const heroSection = document.querySelector(".hero-viewfinder");
     const viewfinderWrap = document.getElementById("viewfinderWrap");
@@ -2649,6 +2766,47 @@ function updateCountdown() {
       }, 1400);
     }
 
+    async function copyText(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "12px";
+      textarea.style.left = "12px";
+      textarea.style.width = "160px";
+      textarea.style.height = "34px";
+      textarea.style.opacity = "0.01";
+      textarea.style.zIndex = "-1";
+      document.body.appendChild(textarea);
+      textarea.focus({ preventScroll: true });
+      textarea.select();
+      textarea.setSelectionRange(0, textarea.value.length);
+
+      let copiedByEvent = false;
+      const onCopy = (event) => {
+        event.preventDefault();
+        event.clipboardData.setData("text/plain", text);
+        copiedByEvent = true;
+      };
+
+      try {
+        document.addEventListener("copy", onCopy, { once: true });
+        const copied = document.execCommand("copy");
+        document.removeEventListener("copy", onCopy);
+        if (copied || copiedByEvent) return;
+      } finally {
+        document.removeEventListener("copy", onCopy);
+        document.body.removeChild(textarea);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      throw new Error("copy failed");
+    }
+
     const accountCopyButtons = document.querySelectorAll(".account-item .copy-btn");
     accountCopyButtons.forEach((btn) => {
       btn.addEventListener("click", async (e) => {
@@ -2658,8 +2816,8 @@ function updateCountdown() {
         const original = btn.textContent;
 
         try {
-          await navigator.clipboard.writeText(text);
-          btn.textContent = "복사됨";
+          await copyText(text);
+          btn.textContent = "복사완료";
           btn.classList.add("copied");
           showCopyToast();
 
@@ -2668,10 +2826,9 @@ function updateCountdown() {
             btn.classList.remove("copied");
           }, 1200);
         } catch (err) {
-          showCopyToast("복사에 실패했습니다.");
+          showCopyToast("복사에 실패했습니다. 계좌번호를 길게 눌러 복사해주세요.");
         }
       });
-    });
-  </script>
+    });  </script>
 </body>
 </html>
