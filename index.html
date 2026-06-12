@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>모바일 청첩장</title>
-  <script defer type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_NAVER_MAP_CLIENT_ID"></script>
+
 
     <link rel="preload" as="image" href="images/optimized/2.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -462,118 +462,133 @@
 
     /* FILM */
     .film-zone {
-      background: #02080b;
-      color: #fff;
-      padding: 34px 0 84px;
-      position: relative;
-      overflow: visible;
-    }
+  background: #02080b;
+  color: #fff;
+  padding: 34px 0 84px;
+  position: relative;
+  overflow: hidden;
+}
 
-    .film-track-wrap {
-      position: relative;
-      width: 100%;
-      overflow: visible;
-    }
+.film-track-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 
-    .top-row {
-      height: 185px;
-      margin-bottom: 26px;
-    }
+.top-row {
+  position: relative;
+  height: 185px;
+  margin-bottom: 26px;
+  transform: rotate(8deg);
+  transform-origin: center center;
+}
 
-    .bottom-row {
-      height: 205px;
-      margin-top: 30px;
-    }
+.bottom-row {
+  position: relative;
+  height: 205px;
+  margin-top: 30px;
+  transform: rotate(-8deg);
+  transform-origin: center center;
+}
 
-    .film-track {
-      display: flex;
-      width: max-content;
-      gap: 16px;
-      padding: 8px 0 8px;
-    }
+.film-track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  padding: 8px 0;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
 
-    .film-small {
-      transform: rotate(8deg) translateX(-40px);
-      animation: filmFlowReverse 18s linear infinite;
-    }
+.film-small,
+.film-large {
+  animation-duration: 14s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
-    .film-large {
-      transform: rotate(-8deg) translateX(-20px);
-      animation: filmFlow 18s linear infinite;
-    }
+.film-small {
+  animation-name: filmFlowReverse;
+}
 
-    @keyframes filmFlow {
-      from {
-        transform: translateX(-20px) rotate(-8deg);
-      }
-      to {
-        transform: translateX(-52%) rotate(-8deg);
-      }
-    }
+.film-large {
+  animation-name: filmFlow;
+}
 
-    @keyframes filmFlowReverse {
-      from {
-        transform: translateX(-52%) rotate(8deg);
-      }
-      to {
-        transform: translateX(-20px) rotate(8deg);
-      }
-    }
+@keyframes filmFlow {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
 
-    .film-strip {
-      display: flex;
-      gap: 16px;
-    }
+@keyframes filmFlowReverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
 
-    .film-frame {
-      width: 152px;
-      background: var(--film-black);
-      border-radius: 0;
-      padding: 11px 9px 13px;
-      position: relative;
-      flex-shrink: 0;
-      box-shadow: 0 14px 24px rgba(0,0,0,0.35);
-    }
+.film-strip {
+  display: flex;
+  gap: 16px;
+}
 
-    .film-small .film-frame {
-      width: 134px;
-    }
+.film-frame {
+  width: 152px;
+  background: var(--film-black);
+  border-radius: 0;
+  padding: 11px 9px 13px;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 14px 24px rgba(0,0,0,0.35);
+}
 
-    .film-large .film-frame {
-      width: 160px;
-    }
+.film-small .film-frame {
+  width: 134px;
+}
 
-    .film-frame::before,
-    .film-frame::after {
-      content: "";
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      height: 9px;
-      background: repeating-linear-gradient(
-        to right,
-        var(--film-hole) 0 9px,
-        transparent 9px 17px
-      );
-      opacity: 0.92;
-    }
+.film-large .film-frame {
+  width: 160px;
+}
 
-    .film-frame::before { top: 3px; }
-    .film-frame::after { bottom: 3px; }
+.film-frame::before,
+.film-frame::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  height: 9px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--film-hole) 0 9px,
+    transparent 9px 17px
+  );
+  opacity: 0.92;
+}
 
-    .film-photo {
-      margin-top: 11px;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      background: #000;
-    }
+.film-frame::before { top: 3px; }
+.film-frame::after { bottom: 3px; }
 
-    .film-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: grayscale(0.45) saturate(0.78) contrast(1.06) brightness(0.97);
-    }
+.film-photo {
+  margin-top: 11px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #000;
+}
+
+.film-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.28) saturate(0.88) contrast(1.04) brightness(0.98);
+  transform: translateZ(0);
+}
 
     .film-center-copy {
       width: calc(100% - 82px);
@@ -1876,7 +1891,6 @@ body.modal-open {
   height: 78px;
 }
 
-<style>
 .tear-divider-black {
   width: 100%;
   height: 72px;
@@ -1987,7 +2001,7 @@ body.modal-open {
           <div class="film-strip">
             <div class="film-frame"><div class="film-photo"><img src="images/top1.jpg" alt="" loading="lazy" decoding="async"></div></div>
             <div class="film-frame"><div class="film-photo"><img src="images/top2.JPG" alt="" loading="lazy" decoding="async"></div></div>
-            <div class="film-frame"><div class="film-photo"><img src="images/top3.jp" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="film-frame"><div class="film-photo"><img src="images/top3.jpg" alt="" loading="lazy" decoding="async"></div></div>
             <div class="film-frame"><div class="film-photo"><img src="images/top4.jpg" alt="" loading="lazy" decoding="async"></div></div>
             <div class="film-frame"><div class="film-photo"><img src="images/top5.JPG" alt="" loading="lazy" decoding="async"></div></div>
             <div class="film-frame"><div class="film-photo"><img src="images/top6.jpg" alt="" loading="lazy" decoding="async"></div></div>
@@ -2198,7 +2212,7 @@ body.modal-open {
                 <div class="sign-line">조신용 · 문명희 의 딸 조은아</div>
               </div>
 
-              <div class="flip-hint"><br /><strong>⟡ Click ⟡</strong></div>
+              <div class="flip-hint"><strong>⟡ Click ⟡</strong></div>
             </div>
 
             <div class="invite-back">
@@ -2734,27 +2748,6 @@ function handleSwipe() {
       });
     }
 
-    function initWeddingMap() {
-      if (!window.naver || !document.getElementById("naverMap")) return;
-
-      const venueLat = 37.568763;
-      const venueLng = 126.897392;
-      const venuePosition = new naver.maps.LatLng(venueLat, venueLng);
-
-      const map = new naver.maps.Map("naverMap", {
-        center: venuePosition,
-        zoom: 17,
-        minZoom: 10,
-        zoomControl: true,
-        zoomControlOptions: {
-          position: naver.maps.Position.TOP_RIGHT
-        },
-        draggable: true,
-        pinchZoom: true,
-        scrollWheel: true,
-        keyboardShortcuts: false
-      });
-
       const marker = new naver.maps.Marker({
         position: venuePosition,
         map,
@@ -2779,9 +2772,8 @@ function handleSwipe() {
           infoWindow.open(map, marker);
         }
       });
-    }
+    
 
-    window.addEventListener("load", initWeddingMap);
 
     const accountGroups = document.querySelectorAll(".account-group");
     accountGroups.forEach((group) => {
